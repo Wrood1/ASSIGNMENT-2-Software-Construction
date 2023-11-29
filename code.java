@@ -1,23 +1,27 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 public class SensorDataProcessor {
     // Senson data and limits.
-    // test 
-    // test 2
+   
     public double[][][] data;
     public double[][] limit;
     // constructor
-    public DataProcessor(double[][][] data, double[][] limit) {
+    public SensorDataProcessor(double[][][] data, double[][] limit) {
     this.data = data;
     this.limit = limit;
     }
+
     // calculates average of sensor data
-    private double average(double[] array) {
-    int i = 0;
-    double val = 0;
-    for (i = 0; i < array.length; i++) {
-    val += array[i];
+     private double average(double[] array) {
+        double sum = 0;
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return sum / array.length;
     }
-    return val / array.length;
-    }
+
+
     // calculate data
     public void calculate(double d) {
     int i, j, k = 0;
