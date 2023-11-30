@@ -21,13 +21,13 @@ public class SensorDataProcessor{
             sum += array[i];
         }
         return sum / array.length;
-    }
+
     // calculate data
     public void calculate(double d) {
 
     double[][][] data2 = new
     double[data.length][data[0].length][data[0][0].length];
-    BufferedWriter out = null;
+ 
     // Write racing stats data into a file
     try {
     out = new BufferedWriter(new FileWriter("RacingStatsData.txt"));
@@ -35,7 +35,6 @@ public class SensorDataProcessor{
     for (int j = 0; j < data[0].length; j++) {
     for (int k = 0; k < data[0][0].length; k++) {
     data2[i][j][k] = data[i][j][k] / d -
-    Math.pow(limit[i][j], 2.0);
 
     if (average(data2[i][j]) > 10 && average(data2[i][j]) 
     < 50)
@@ -50,7 +49,6 @@ public class SensorDataProcessor{
     data2[i][j][k] *= 2;
     else
     continue;
-    }
     }
     }
 // Save the calculated data to the file
