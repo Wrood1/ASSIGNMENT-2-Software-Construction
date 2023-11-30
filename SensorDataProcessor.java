@@ -22,8 +22,6 @@ public class SensorDataProcessor{
         }
         return sum / array.length;
     }
-
-
     // calculate data
     public void calculate(double d) {
 
