@@ -1,5 +1,7 @@
-import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
+
 
 public class SensorDataProcessor{
     // Senson data and limits.
@@ -19,15 +21,13 @@ public class SensorDataProcessor{
             sum += array[i];
         }
         return sum / array.length;
-    }
-
-    
 
     // calculate data
     public void calculate(double d) {
+
     double[][][] data2 = new
     double[data.length][data[0].length][data[0][0].length];
-    BufferedWriter out;
+ 
     // Write racing stats data into a file
     try {
     out = new BufferedWriter(new FileWriter("RacingStatsData.txt"));
@@ -35,7 +35,7 @@ public class SensorDataProcessor{
     for (int j = 0; j < data[0].length; j++) {
     for (int k = 0; k < data[0][0].length; k++) {
     data2[i][j][k] = data[i][j][k] / d -
-    Math.pow(limit[i][j], 2.0);
+
     if (average(data2[i][j]) > 10 && average(data2[i][j]) 
     < 50)
     break;
@@ -51,15 +51,28 @@ public class SensorDataProcessor{
     continue;
     }
     }
-    }
-    for (i = 0; i < data2.length; i++) {
-    for (j = 0; j < data2[0].length; j++) {
-    out.write(data2[i][j] + "\t");
-    }
+// Save the calculated data to the file
+    for(int i = 0; i < data2.length; i++) {
+        for (int j = 0; j < data2[0].length; j++) {
+            for (int k = 0; k < data2[0][0].length; k++) {
+                out.write(data2[i][j][k] + "\t");
+            }
+            out.newLine(); // Place a line break after each inner array is written
+        }
     }
     out.close();
-    } catch (Exception e) {
-    System.out.println("Error= " + e);
+    } catch (IOException e) {
+        System.out.println("Error: " + e.getMessage());
+    } finally {
+        try {
+            if (out != null)
+                out.close(); // Close the file writer
+        } catch (IOException e) {
+            System.out.println("Error closing the file: " + e.getMessage());
+        }
+// end of calculate method
+
+    } 
+
     }
-    }
-    }
+}
