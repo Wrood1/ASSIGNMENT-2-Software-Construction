@@ -90,6 +90,6 @@ public class SensorDataProcessor {
                 System.out.println("Error closing the file: " + e.getMessage());
             }
         }
-     //I am Rania and I wrote this comment to make sure my commit is correct
+     //I am Dania and I wrote this comment to make sure my commit is correct
     }
 }
