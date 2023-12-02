@@ -2,10 +2,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedWriter;
 
-
 public class SensorDataProcessor {
     // Sensor data and limits.
-
     public double[][][] data;
     public double[][] limit;
 
@@ -47,14 +45,17 @@ public class SensorDataProcessor {
 
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
+                    boolean shouldSkipDataPoint = false;
                     for (int k = 0; k < data[0][0].length; k++) {
                         // Check for average condition
                         if (average(data2[i][j]) > 10 && average(data2[i][j]) < 50) {
+                            shouldSkipDataPoint = true;
                             break; // Skip to the next data point
                         }
 
                         // Check for maximum and data2 value comparison
                         if (Math.max(data[i][j][k], data2[i][j][k]) > data[i][j][k]) {
+                            shouldSkipDataPoint = true;
                             break; // Skip to the next data point
                         }
 
@@ -65,6 +66,10 @@ public class SensorDataProcessor {
                         } else {
                             continue; // Skip to the next iteration
                         }
+                    }
+
+                    if (shouldSkipDataPoint) {
+                        break; // Skip to the next data point
                     }
                 }
             }
@@ -78,7 +83,6 @@ public class SensorDataProcessor {
                     out.newLine(); // Place a line break after each inner array is written
                 }
             }
-            out.close();
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
@@ -90,6 +94,6 @@ public class SensorDataProcessor {
                 System.out.println("Error closing the file: " + e.getMessage());
             }
         }
-     //I am Dania and I wrote this comment to make sure my commit is correct
-    }
+    }//I am Dania and I wrote this comment to make sure my commit is correct
+
 }
